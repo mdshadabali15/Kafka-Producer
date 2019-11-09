@@ -1,0 +1,29 @@
+spring:
+  cloud:
+    stream:
+      binders:
+        kafka_binders:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers: localhost:9092
+        maddy_binders:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers: 192.168.0.101:9092
+      bindings:
+        output:
+          destination: kafka-status-topic
+          binder: kafka_binders
+        maddyoutput:
+          destination: kafka-logs
+          binder: maddy_binders
